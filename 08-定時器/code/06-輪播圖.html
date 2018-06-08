@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Practice</title>
+    <style type="text/css">
+        div {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #img {
+            width: 600px;
+        }
+    </style>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var oImg = $("img");
+            //控制圖片
+            var index = 1;
+            //圖片名
+            var imgName = '';
+
+            //開啟時鐘
+            setInterval(function(){
+                index++;
+                if(index > 5){  //當超過圖片數時，重複回第一張
+                    index = 1;
+                }
+                // console.log(index);
+
+                //圖片拼接
+                imgName = "img/img_0" + index + ".png";
+
+                //改變圖片
+                oImg.src = imgName;
+            },2000);
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <img src="img/img_01.png" id="img" />
+    </div>
+</body>
+</html>
