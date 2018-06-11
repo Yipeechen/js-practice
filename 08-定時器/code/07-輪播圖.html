@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Practice</title>
+    <style type="text/css">
+        div {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        #box {
+            width: 600px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        #pageView {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            height: 14px;
+        }
+
+        #pageView i {
+            width: 10px;
+            height: 10px;
+            border: 2px solid gray;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        #pageView .active {
+            background: black;
+            border-color: black;
+        }
+
+        img {
+            display: block;
+            border: 0;
+        }
+    </style>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var oImg = $("img");
+            var aPage = document.getElementsByTagName('i');
+            var timer = null;      
+            var index = 1;  //控制圖片
+            var imgName = '';  //圖片名
+            var currentPage = 0; //自定義屬性 - 樣式處理加上:current
+
+            startTimer();
+            
+            //頁碼點擊操作
+            for(var i=0; i< aPage.length; i++){
+                aPage[i].index = i //自定義屬性加上index;紀錄哪一下標點擊
+                aPage[i].onclick = function(){  //點擊下標時
+                    stopTimer();               //關閉時鐘
+                    index = this.index;        //根據下標切換
+                    changeView();
+                    startTimer();              //開啟時鐘，繼續執行
+                }
+            }
+
+            //開啟時鐘
+            function startTimer() {
+                if(timer == null){
+                    timer = setInterval(upDate, 2000);
+                }
+            };
+
+            //關閉時鐘
+            function stopTimer() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            //觸發時鐘操作
+            function upDate() {
+                index++;
+                changeView();
+            }
+
+            //改變視圖
+            function changeView(){
+                if(index > 4){
+                    index = 0;
+                }
+                imgName = 'img/img_0' + (index + 1) + '.png'; //改變圖片，圖片從一開始
+                oImg.src = imgName;
+
+                aPage[currentPage].className = ''; //改變頁碼，先清空
+                currentPage = index;
+                aPage[currentPage].className = 'active'; //添加classs樣式上去
+            }
+
+
+        });
+    </script>
+</head>
+<body>
+    <div id="box">
+        <img src="img/img_01.png" id="img" />
+        <p id="pageView">
+            <i class="active"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </p>
+    </div>
+</body>
+</html>
