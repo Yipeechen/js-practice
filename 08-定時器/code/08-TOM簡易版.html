@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js Practice</title>
+
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 320px;
+            height: 568px;
+        }
+    </style>
+    <!-- <script src="../../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script> -->
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var timer = null;
+            var index = 0;
+
+            //開始按鈕
+            $('btn1').onclick = function(){
+                if(timer == null) {
+                    timer = setInterval(changeView, 90);
+                }
+            }
+            
+            //停止按鈕
+            $('btn2').onclick = function(){
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function changeView(){
+                index++;
+                if(index > 25){
+                    index = 0;
+                }
+                $('img').src = "img2/angry_" + format(index,2) + ".jpg";
+            }
+
+            //圖片數字名稱格式化操做(index:數字，num：數字位數)
+            function format(index, num){
+                var str = index.toString();
+                while(str.length != num) { //次數不確定時，使用while
+                    str = '0' + str;
+                }
+                return str;
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="開始" id="btn1" />
+    <input type="button" value="停止" id="btn2" />
+    <br>
+    <img src="img2/angry_00.jpg" alt="tom-angry" id="img">
+</body>
+</html>
