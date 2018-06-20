@@ -17,32 +17,32 @@
             height: 568px;
         }
     </style>
-    <!-- <script src="../../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script> -->
-    <script type="text/javascript" src="onload.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <!-- <script type="text/javascript" src="onload.js"></script> -->
     <script type="text/javascript">
         $(function(){
             var timer = null;
             var index = 0;
 
             //開始按鈕
-            $('btn1').onclick = function(){
+            $('#btn1').on('click', function(){
                 if(timer == null) {
                     timer = setInterval(changeView, 90);
                 }
-            }
+            });
             
             //停止按鈕
-            $('btn2').onclick = function(){
+            $('#btn2').on('click', function(){
                 clearInterval(timer);
                 timer = null;
-            }
+            });
 
             function changeView(){
                 index++;
                 if(index > 25){
                     index = 0;
                 }
-                $('img').src = "img2/angry_" + format(index,2) + ".jpg";
+                $('#img').attr('src','img2/angry_' + format(index,2) + '.jpg');
             }
 
             //圖片數字名稱格式化操做(index:數字，num：數字位數)
