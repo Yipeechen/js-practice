@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var oBox = $('box');
+            // oBox所有子節點
+            var nodes = oBox.childNodes;
+
+            // alert(nodes.length);
+            for(var i = 0;i<nodes.length; i++){
+                if(nodes[i].nodeType == 1){ //元素節點
+                    //alert(nodes[i].nodeName);
+
+                    //注意大小寫問題
+                    if (nodes[i].nodeName.toLocaleLowerCase() == 'span'){
+                        // alert('獲取span標籤');
+                        // alert(nodes[i].nodeValue); // null 屬性值
+                        // alert(nodes[i].innerHTML); //你好.
+                    }
+
+                } else if(nodes[i].nodeType == 2){ //屬性節點
+                    //alert(nodes[i].nodeName);
+
+                } else if (nodes[i].nodeType == 3){ //文本節點
+                    //alert(nodes[i].nodeName);
+
+                }
+            }
+
+            // innerHTML 和 nodeValue的賦值問題
+            var oTest = $('test');
+            // oTest.innerHTML = '<h1>DOM操作</h1>'; //不顯示文本標籤: 'DOM操作'
+
+            // oTest.childNodes[0].nodeValue = '<h1>DOM操作</h1>'; //顯示文本標籤(純文字): '<h1>DOM操作</h1>'
+
+            var oView = $('view');
+            // alert(oView.firstChild.nodeName); //P
+            // alert(oView.lastChild.nodeName); //SPAN
+            // alert(oView.parentNode.nodeName); //BODY
+            // alert(oView.lastChild.previousSibling.nodeName);//A 同級別中的前一個
+            // alert(oView.firstChild.nextSibling.nodeName);//A 同級別中的下一個
+        });
+    </script>
+</head>
+<body>
+    <!-- IE是有一個子節點，非IE是有3個 -->
+    <!-- <div id="box">
+        <a href="#">Hello world!</a>
+    </div> -->
+
+    <div id="box">
+        <a href="#">hello world!</a>
+        <span>你好.</span>
+    </div>
+
+    <div id="test"></div>
+
+    <div id="view"><p>今天是週一</p><a href="#">百度</a><span>6月21號</span></div>
+</body>
+</html>
