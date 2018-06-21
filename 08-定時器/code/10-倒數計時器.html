@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS practice</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 100px;
+        }
+        div {
+            margin-top: 100px;
+            text-align: center;
+        }
+        i {
+            display: inline-block;
+            width: 25%;
+            height: 50%;
+            background:#123456;
+            color: white;
+            line-height: 200px;
+            font-size: 100px;
+            border-radius: 20px;
+        }
+    </style>
+
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var aI = document.getElementsByTagName('i');
+
+            setInterval(function(){
+                // 倒數計時 ＝ 結束時間 - 現在時間
+
+                // 現在時間
+                var time = new Date();
+                var nowTime = time.getTime();
+
+                // 結束時間：6月22日 12點0分0秒
+                time.setMonth(5);   //range : 0 - 11
+                time.setDate(22);
+                time.setHours(12);
+                time.setMinutes(0);
+                time.setSeconds(0);
+                var endTime = time.getTime();
+
+                //倒數計時器：差值
+                var offsetTime = (endTime - nowTime) / 1000;   
+                //得到毫秒數故除以1000
+
+                var s = parseInt(offsetTime % 60);
+                var m = parseInt(offsetTime / 60 % 60);
+                var h = parseInt(offsetTime / 60 / 60);
+
+                aI[0].innerHTML = h;
+                aI[1].innerHTML = m;
+                aI[2].innerHTML = s;
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <i></i> : <i></i> : <i></i> 
+    </div>
+</body>
+</html>
