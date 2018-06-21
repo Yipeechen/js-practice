@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js pracetice</title>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        // document.getElementById()
+        // document.getElementsByTagName()
+        // document.getElementsByClassName()
+
+        // 系統本身
+        // var aList = document.getElementsByClassName('section');
+        // for (var i = 0; i<aList.length; i++){
+        //     aList[i].style.color = 'red';
+        // }
+
+        // 自己封裝
+        var aList = getElementsByClassName(document,'section','li');
+        for (var i = 0; i<aList.length; i++){
+            aList[i].style.color = 'red';
+        }
+
+
+        /*
+        * object：要獲取元素中的子元素
+        * className：元素的class名
+        * tagName：標籤名稱
+        */
+        function getElementsByClassName(object,className,tagName){
+            var aElement = object.getElementsByTagName(tagName);
+            var arr = [];
+
+            //遍歷元素
+            for(var i = 0; i<aElement.length; i++){
+                // class ="section section1 section section"
+                // if(aElement[i].className == className){
+                //     arr.push(aElement[i]);
+                // }
+
+                // 將字符串以空格拆分成數組（每個元素其實就是一個class名）
+                var names = aElement[i].className.split(' ');
+
+                // 遍歷className
+                for(var j = 0; j<names.length; j++){
+                    if(names[j] == className){
+                        arr.push(aElement[i]);
+
+                        break; // 避免有重複的classname
+                    }
+                }
+            }
+            return arr;
+        }
+    });
+    </script>
+</head>
+<body>
+    <ul>
+        <li class="section section1 section section">1、你好</li>
+        <li class="section section2">2、你好</li>
+        <li class="section section3 center">3、你好</li>
+        <li class="clearfix section">4、你好</li>
+        <li class="section4">5、你好</li>
+    </ul>
+</body>
+</html>
