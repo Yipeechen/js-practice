@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 350px;
+            height: 568px;
+            border: 1px solid gray;
+            overflow: auto;
+        }
+
+        .section{
+            width: 310px;
+            padding: 10px;
+            margin: 5px;
+            border-bottom: 1px solid gray;
+            display: table;
+        }
+
+        .section a{
+            text-decoration: none;
+            display: table-cell;vertical-align: middle;
+            text-align: center;
+        }
+
+        .section p{
+            margin-left: 15px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+            var oSection = null;
+            var oName = null;
+            var oHead = null;
+            var oContent = null;
+            var oText = null;
+
+            //廣告
+            var oAd = null;
+
+            for(var i = 0; i<12; i++){  //使用循環將app section加上
+  
+                // 插入廣告
+                if( i == 3){
+                    oAd = document.createElement('div');
+                    oAd.className = 'section';
+                    oAd.style.backgroundColor = 'darkgray';
+                    oBox.appendChild(oAd);
+
+
+                    //再創建裡面的a超連結
+                    oName = document.createElement('a');
+                    oName.href = '#';
+                    oAd.appendChild(oName);
+
+
+                    //再創建a超連結裡面的字，故不是創建元素
+                    oText = document.createTextNode('超低價iPhoneX');
+                    oName.appendChild(oText);
+
+                    //最後創建p裡面的敘述內容
+                    oContent = document.createElement('p');
+                    oContent.innerHTML = '廣告：走過路過千萬不要錯過iPhoneX，不要9999，只要998';
+
+                    oAd.appendChild(oContent);
+
+                }
+
+                //先創建外層的div class="section"
+                oSection = document.createElement('div');
+                oSection.className = 'section';
+                oBox.appendChild(oSection);
+
+                //再創建裡面的a超連結
+                oName = document.createElement('a');
+                oName.href = '#';
+                oSection.appendChild(oName);
+
+                //再創建a裡面的img圖片
+                oHead = document.createElement('img');
+                oHead.src = "img/icon_" + format(i,2) + ".png";
+                oName.appendChild(oHead);
+
+                //再創建a超連結裡面的字，故不是創建元素
+                oText = document.createTextNode((i+1) + '、VSC');
+                oName.appendChild(oText);
+
+                //最後創建p裡面的敘述內容
+                oContent = document.createElement('p');
+                oContent.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, recusandae.';
+                oSection.appendChild(oContent);
+
+                //圖片名稱格式化
+                function format(index, num){
+                    var str = index.toString();
+                    if(str.length != num){
+                        str = '0' + str;
+                    }
+                    return str;
+                }
+
+
+            }
+            //設置定時器，時間一到刪除廣告
+            setTimeout(function(){
+                oBox.removeChild(oAd);
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <!-- <div class="section">
+            <a href="#"><img src="img/icon_00.png" alt="酷跑">
+            酷跑
+            </a>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, recusandae.</p>
+        </div> -->
+    </div>
+</body>
+</html>
