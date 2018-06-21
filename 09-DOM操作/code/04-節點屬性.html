@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //1.元素節點
+           var oBox = $('box'); 
+
+            //分為 nodeName/nodeType/nodeValue
+            //nodeName (oBox.nodeName => div)
+            //nodeType: 元素節點:1 / 屬性節點:2 / 文本節點:3
+            //nodeValue:  元素節點:null / 屬性節點:屬性值 / 文本節點: 文本內容
+
+            //2.屬性節點
+            var att = oBox.attributes[0];
+
+            //分為 nodeName/nodeType/nodeValue
+            //nodeName (att.nodeName => id)
+            //nodeType: 元素節點:1 / 屬性節點:2 / 文本節點:3 (att.nodeType => 2)
+            //nodeValue:  元素節點:null / 屬性節點:屬性值 / 文本節點: 文本內容 (att.nodeValue => box)  
+           
+        });
+    </script>
+</head>
+<body>
+    <div id="box">
+        hello world!
+    </div>
+</body>
+</html>
