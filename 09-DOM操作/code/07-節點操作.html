@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript">
+    window.onload = function(){
+        //方法一
+        // var str = '<ul>';
+
+        // for(var i = 0; i<5; i++){
+        //     str += '<li>' + (i+1) + '、hello world!</li>';
+        // }
+        // str += '</ul>';
+
+        // //寫入操作
+        // document.write(str);
+
+
+        //方法二
+        //step1:創建元素節點
+        var oTitle = document.createElement('h1');
+        //step2:設置元素節點
+        oTitle.innerHTML = '你好！';
+        //step3:添加到介面中
+        document.body.appendChild(oTitle);
+
+        //step4:繼續添加元素
+        var oBd = document.createElement('a');
+        oBd.href = '#';
+        oBd.innerHTML = '百度一下';
+        //oTitle & oBd 同一個級別
+        // document.body.appendChild(oBd);
+        
+        //oTitle & oBd 父子關係
+        // oTitle.appendChild(oBd);
+
+        //創建文本節點（顯示文本：只顯示文字）
+        var oText = document.createTextNode('<h1>你好</h1>');
+        oTitle.appendChild(oText);
+
+        //insertBefore(元件,插入位置) 將新節點插入到前面
+        var oLi = document.createElement('li');
+        oLi.innerHTML = '測試代碼';
+        oView = document.getElementById('view');
+
+        //在oView前面添加oLi(和oView同一層級)
+        // oView.parentNode.insertBefore(oLi,oView);
+            
+        //在oView裡面添加 (oView的第一個子元素)
+        // oView.insertBefore(oLi,oView.firstChild);
+
+        //在oView裡面添加 (oView的最後一個子元素)
+        oView.appendChild(oLi);
+
+
+    }
+    </script>
+
+</head>
+<body>
+    <ul id="view">
+        <li>1、標題</li>
+        <li>2、標題</li>
+        <li>3、標題</li>
+        <li>4、標題</li>
+    </ul>
+</body>
+</html>
