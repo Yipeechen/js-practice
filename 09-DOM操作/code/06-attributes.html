@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var oView = $('view');
+
+            // alert(oView.attributes.length); 
+            // alert(oView.attributes[0]);   //[object Attr]
+            
+
+            //遍歷操作
+            // for(name in oView.attributes){ //把oView.attributes（是一個數組）裡面的值一個一個取出來，賦值到name
+            //     document.write(name);
+            //     document.write('<br>');
+            // }
+
+            //獲取
+            alert(oView.attributes['id'].nodeValue); //view
+            alert(oView.attributes['id'].nodeType); //2
+            alert(oView.attributes['id'].nodeName); //id
+
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="view" class="section"></div>
+</body>
+</html>
