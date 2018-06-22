@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+            
+            // 獲取屬性值方法一、自定義屬性
+            oBox.tab = 10;
+            oBox.dataisFavorited = true;
+
+            // alert(oBox.tab); //10
+            // alert(oBox.dataisFavorited); //true
+
+            // 獲取屬性值方法二、data-name 自定義屬性
+            var att = oBox.attributes;
+
+            //alert(att['id']).nodeValue; //box
+            //alert(oBox.getAttribute('data-isShow')); //true
+                        
+            // 獲取屬性值方法三、系統 .getAttribute()
+            // alert(oBox.getAttribute('data-isShow')); //true
+
+
+            // 設置節點屬性方法一、 自定義屬性
+            // oBox.style.color = 'red';
+
+            // 設置節點屬性方法二、 .setAttribute('attr', 'property : property-value')
+            // oBox.setAttribute('style', 'color:red; background: black;');
+            // oBox.setAttribute('class','view1');
+
+            // 刪除節點屬性 .removeAttribute()
+            // oBox.removeAttribute('class');
+        }
+    </script>
+</head>
+<body>
+    <!-- 二、data-name:自定義屬性 -->
+    <div id="box" class="section" data-index= "0" data-isShow="true">
+        hello world!
+    </div>
+</body>
+</html>
