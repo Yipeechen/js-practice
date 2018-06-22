@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js Practice</title>
+    <script type="text/javascript">
+        window.onload = function(){
+
+            // 方法一:單純使用for循環
+            // for(var i = 0; i<100; i++){
+            //     var oImg = document.createElement('img');
+            //     oImg.src = 'img/test.jpeg';
+
+            //     document.body.appendChild(oImg);
+            // }
+
+            //方法二:使用.cloneNode()複製此節點
+            var oImg = document.createElement('img');
+            oImg.src = 'img/test.jpeg';
+
+            var temp = null;
+            for(var i = 0; i<100; i++){
+                temp = oImg.cloneNode();
+                document.body.appendChild(temp);
+            }
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
