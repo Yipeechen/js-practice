@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width:135px;
+            height: 27px;
+            /* background: red; */
+            margin: 30px;
+        }
+
+        li {
+            float: left;
+            width: 27px;
+            height: 27px;
+            background: url(img/star.gif);
+        }
+        .active {
+            background-position-y: -29px;
+        }
+    </style>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var aLi = document.getElementsByTagName('li');
+            var oInfo = document.getElementsByTagName('p')[0];
+            
+            //用於保存評分下標
+            //評分值:0-4
+            //只是初始化狀態，默認不為0
+            var current = -1;
+
+            for(var i = 0; i<aLi.length; i++){
+                
+               //自定義屬性：每一個都有對應的下標
+               aLi[i].index = i;
+
+               //鼠標移入
+               aLi[i].onmouseover = function(){
+
+                    //根據鼠標所在的位置，點亮對應的星星
+                //    for(var j=0; j<= this.index; j++){
+                //        aLi[j].className = 'active';
+                //    }
+
+                   //回退操作：遍歷所有星星
+                   for(var j=0; j<aLi.length; j++){
+                       if(j <= this.index){      //點亮
+                            aLi[j].className = 'active';
+                       } else {                 //熄滅
+                            aLi[j].className = '';
+                       }
+                   }
+               }
+
+               //鼠標移出
+               aLi[i].onmouseout = function(){
+                   //沒點擊沒評分：所有的都熄滅
+                   //有評分時num：num已經num前面的點亮
+                   for(var j=0; j<aLi.length; j++){
+                       if(j <= current){
+                           aLi[j].className = 'active';
+                       } else {
+                           aLi[j].className = '';
+                       }
+                   }
+               }
+               //鼠標點擊功能
+               aLi[i].onclick = function(){
+                   current = this.index;
+                   oInfo.innerHTML = '評分： ' + (current + 1);
+               }
+
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="view">
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <p></p>
+    </div>
+</body>
+</html>
