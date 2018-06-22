@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript" src="onload.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var oW = null;
+
+            $('btn1').onclick = function(){
+                // window.document
+
+                //打開空白網頁 window.open('url','打開方式')
+                // window.open('','_blank')
+                oW = window.open('https://www.google.com.tw/','_blank')
+            };
+
+            $('btn2').onclick = function(){
+                //關閉剛剛打開的網頁
+                // oW.close();
+
+                //關閉現在這個網頁
+                window.close();
+
+            };
+
+            //操作系統及瀏覽器訊息
+            console.log(window.navigator.userAgent)
+
+            //判斷IE或非IE操作
+            // if(window.navigator.userAgent.indexOf('MSIE')!= -1){
+            //     alert('IE browser');
+            // } else {
+            //     alert('非IE browser');
+            // }
+
+            //判斷更詳盡瀏覽器
+            if (window.navigator.userAgent.indexOf('Firefox') != -1){
+                alert('Firefox');
+            } else if (window.navigator.userAgent.indexOf('Chrome') != -1){
+                alert('Google');
+            } else if (window.navigator.userAgent.indexOf('MSIE') != -1){
+                alert('IE');
+            } else {
+                alert('other');
+            }
+
+            //獲取URL內容 window.location
+            alert(window.location);
+            //URL中『？』後面的內容  .search
+            alert(window.location.search);
+            //URL中『＃』後面的內容  .search
+            alert(window.location.hash);
+
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="打開" id="btn1">
+    <input type="button" value="關閉" id="btn2">
+</body>
+</html>
