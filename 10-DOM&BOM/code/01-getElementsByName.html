@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js Practice</title>
+    <script type="text/javascript">
+        /*
+        s: 表示字符串。例如: sName, sHtml;
+        n: 表示數字。例如: nPage, nTotal;
+        b: 表示邏輯。例如: bChecked, sShow;
+        a: 表示數組。例如: aList, aGroup;
+        r: 表示正則表達式。例如: rDomain, rEmail;
+        f: 表示函數。例如: fInit, fGetHtml;
+        o: 表示以上未涉及到的其他對象。例如: oBt, oDate;
+        g: 表示全局變量。例如: gUserName, gLogin; 
+        */
+
+        window.onload = function(){
+            var aSex = document.getElementsByName('sex');
+
+            document.onclick = function(){
+                alert(aSex[1].checked);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="radio" name="sex">男
+    <input type="radio" name="sex"> 女
+</body>
+</html>
