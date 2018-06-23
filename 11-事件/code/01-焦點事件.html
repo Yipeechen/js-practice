@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oText = document.getElementById('text');
+
+            oText.onfocus = function(){
+                this.value = "";
+            }
+
+            oText.onblur = function(){
+                this.value = '請輸入密碼';
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" value="請輸入密碼" id="text">
+</body>
+</html>
