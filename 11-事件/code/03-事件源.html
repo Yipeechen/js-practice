@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #view {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        #test {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oView = document.getElementById('view');
+            var oTest = document.getElementById('test');
+
+            //點擊blue時，也會觸發，blue就是事件來源
+            oView.onclick = function(ev){
+                // alert(1);
+
+                //兼容性寫法:事件觸發時，會將所有相關信息保存到event對象中
+                ev = window.event || ev;
+                
+                //event內的屬性
+                // IE: srcElement
+                // Chrome / Safari : srcElement & target
+                // Firefox: target
+
+                //事件訊息中就包含有事件源
+                var self = ev.target || ev.srcElement;
+                alert(self.id);  //blue:test  red:view
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="view">
+        <div id="test">
+
+        </div>
+    </div>
+</body>
+</html>
