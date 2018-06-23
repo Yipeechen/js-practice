@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #view {
+            width: 200px;
+            height: 200px;
+            background: red;
+            border: 5px solid black;
+            padding: 10px;
+            overflow: auto;
+            /* margin: 40px; */
+            position: absolute;
+            left: 50px;
+            top: 100px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oView = document.getElementById('view');
+
+            document.onclick = function(){
+                //1. 通過style內聯樣式獲取元素大小
+                alert(oView.style.width); //此處沒有設定寬度故無資料
+
+                //2. 通過計算獲取元素的大小:
+                //   兼容性問題.getComputedStyle()非IE / .currentStyle IE
+                var height = window.getComputedStyle ? getComputedStyle(oView).height : oView.currentStyle.height;
+                alert(height); //200px
+
+
+                //3. .clientWidth 獲取元素多可視化區塊 width+ padding
+                alert(oView.clientWidth);   //220
+
+                //4. .offsetWidth 實際大小即站位大小 width+padding+border
+                alert(oView.offsetWidth);  //230
+
+                //5. .scrollHeight 滾動內容大小
+                alert(oView.scrollHeight);  //262
+
+                //6. .clientLeft 元素左邊邊框大小 
+                alert(oView.clientLeft);   //5
+                //6-1. 元素右邊邊框大小 
+                alert(oView.offsetWidth - oView.clientWidth - oView.clientLeft);  //5
+
+                //7. 獲取相對父元素的位置
+                alert(oView.offsetTop);  //margin:40 //position:100
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="view">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus enim numquam officiis animi, rem ipsam fuga, quis odio, voluptatibus tenetur earum pariatur debitis in inventore at provident? Magnam, voluptates ducimus?
+    </div>
+</body>
+</html>
