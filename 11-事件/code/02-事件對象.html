@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript">
+        document.onclick = function(){
+            alert(window.event);
+            alert(event);
+
+            //IE & Chrome: event 內置全局對象 
+            //Firefox: ev 事件對象 通過事件函數傳入的第一個參數
+            document.onclick = function(ev){
+                // 兼容性問題:如果是Chrome則未有ev需另外寫入window.event，若是Firefox則有ev
+                ev = window.event || ev;
+
+                //遍歷事件對象
+                for(name in ev){
+                    document.write(name + ':' + ev[name]);
+                    document.write('<br/>');
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
