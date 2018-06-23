@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+
+            //onclick (onmousedown + onmouseup)
+            //ondbclick
+            //onmousedown 鼠標按下
+            //onmouseup 鼠標鬆開
+            //onmouseover 鼠標移動
+            //onmouseout 鼠標移出
+            //onfocus 得到焦點
+            //onblur 失去焦點
+
+            oBox.onmousedown = function(){
+
+                //『鼠標按下』後，在此『窗口』『鼠標移動』時
+                document.onmouseover = function(ev){
+                    
+                    //相容性：事件對象
+                    ev = window.event || ev;
+                    
+                    oBox.style.left = ev.clientX + 'px';
+                    oBox.style.top = ev.clientY + 'px';
+
+                }
+
+                //『鼠標鬆開』後，『鼠標移動』停止
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
