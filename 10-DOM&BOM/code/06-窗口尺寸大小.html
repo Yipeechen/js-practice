@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        body {height: 1000px;}
+    </style>
+    <script type="text/javascript">
+        var i = 0;
+
+        //監聽window窗口尺寸調整
+        window.onresize = function(){
+            document.title = i++;
+        }
+
+        //監聽滾輪調整
+        window.onscroll = function(){
+            document.title = i++;
+        }
+
+        //獲取視窗可視化區域寬、高度
+        document.onclick = function(){
+            console.log(document.documentElement.clientWidth);
+            console.log(document.documentElement.clientHeight);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
