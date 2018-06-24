@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: black;
+        }
+        #box {
+            width: 200px;
+            border: 1px solid white;
+            color: white;
+            margin: 40px auto;
+        }
+        h3 {
+            line-height: 40px;
+        }
+        ul{
+            display: none;
+        }
+        li{
+            list-style: none;
+            border-top: 1px dashed white;
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        .active {
+            background-color: gray;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oTitle = document.getElementsByTagName('h3')[0];
+            var oContent = document.getElementsByTagName('ul')[0];
+            var isShow = false;
+            var currentLi = null;
+
+            oTitle.onclick = function(ev){
+                isShow = !isShow;
+                oContent.style.display = isShow ? 'block' : 'none';
+
+                //阻止事件冒泡影響:不要傳到document
+                ev = event || ev;
+                ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = 'true';
+            }
+
+            oContent.onclick = function(ev){
+                //事件源：哪個li被點擊？
+                ev = event || ev;
+                var self = ev.target || ev.srcElement;
+
+                //判斷是否點擊是li
+                if(self.tagName.toLocaleLowerCase() == 'li'){
+                    oTitle.innerHTML = self.innerHTML;
+                }
+            } //利用事件冒泡達到下方將內容隱藏的效果
+
+            oContent.onmousemove = function(ev){
+                //事件源：哪個li被點擊？
+                ev = event || ev;
+                var self = ev.target || ev.srcElement;
+
+                if(self.tagName.toLocaleLowerCase() == 'li'){
+                    // 1、先清空
+                    if(currentLi != null){
+                        currentLi.className = '';
+                    }
+                    // 2、當前li
+                    currentLi = self;
+                    // 3、對應樣式
+                    currentLi.className = 'active';
+                }
+                
+            }
+
+            
+            document.onclick = function(){
+                isShow = false;
+                oContent.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <h3>夢幻西游</h3>
+        <ul>
+            <li>魔獸世界</li>
+            <li>熱血江湖</li>
+            <li>夢幻西游</li>
+            <li>大話西游</li>
+            <li>傳奇</li>
+            <li>奇蹟</li>
+        </ul>
+    </div>
+</body>
+</html>
