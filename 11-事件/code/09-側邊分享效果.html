@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #content {
+            width: 80px;
+            height: 120px;
+            background: #f2f2f2;
+            position: absolute;
+            left: 0;
+            top: 200px;
+            text-align: center;
+            /* 初始設置為隱藏 */
+            left: -80px;
+        }
+        #content a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            line-height: 30px;
+        }
+        #title {
+            width: 30px;
+            height: 50px;
+            background: darkgray;
+            color: white;
+            position: absolute;
+            left: 80px;
+            top: 25px;
+            text-align: center;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+           var oContent = document.getElementById('content'); 
+           var oTitle = document.getElementById('title');
+
+            // 原來#content & #title為分開區塊：事件冒泡功能問題
+            // //鼠標移入
+            // oTitle.onmousemove = function(){
+            //     oContent.style.left = '0';
+            //     this.style.left = '80px';
+            // }
+
+            // //鼠標移出
+            // oTitle.onmouseout = function(){
+            //     oContent.style.left = '-80px';
+            //     this.style.left = '0';
+            // }
+
+            // oContent.onmouseout = function(){
+            //     oContent.style.left = '-80px';
+            //     oTitle.style.left = '0';
+            // }
+
+            //  解決問題 #title 移入 #content 區塊
+            oContent.onmouseover = function(){
+                this.style.left = '0';
+            }
+
+            oContent.onmouseout = function(){
+                this.style.left = '-80px';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="content">
+        <a href="#">Line</a>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+        <a href="#">微博</a>
+        <div id="title">
+            分享
+        </div>
+    </div>
+    
+</body>
+</html>
