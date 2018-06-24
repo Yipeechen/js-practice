@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        table{
+            width: 700px;
+            height: 300px;
+            border: 1px solid gray;
+            margin: 30px auto;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 18px;
+        }
+        td {
+            border: 1px solid gray;
+            width: 140px;
+            height: 50px;
+        }
+        input{
+            width: 138px;
+            height: 50px;
+            background: yellowgreen;
+            font-size: 18px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oTable = document.getElementsByTagName('table')[0];
+
+            //每個td點擊雙擊事件？
+            //利用事件冒泡，減少事件綁定，優化效率
+            oTable.ondblclick = function(ev){
+                //哪個td點擊？ 事件源
+                ev = event || ev;
+                self = ev.target || ev.srcElement;
+
+                //將td內的innerHTML替換成input
+                var oInput = document.createElement('input');
+                oInput.type = 'text';
+                oInput.value = self.innerHTML;
+                self.innerHTML = '';
+                self.appendChild(oInput);
+
+                //一點擊就獲取焦點
+                oInput.focus();
+
+                // 阻止事件冒泡：避免在input內在進行點擊後，觸發下方方法
+                ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = true;
+
+                //Ｏ注意位置： 放置此處的話才可查詢到事件源
+                document.onclick = function(){
+                    //將輸入框中的內容保存到對應的td當中
+                    self.innerHTML = oInput.value;
+                } 
+            }
+
+        //    Ｘ注意位置：放置在此處的話會查詢不到事件源
+        //    document.onclick - function(){
+        //        //將輸入框中的內容保存到對應的td當中
+        //    } 
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>1、單元格</td>
+            <td>2、單元格</td>
+            <td>3、單元格</td>
+            <td>4、單元格</td>
+        </tr>
+        <tr>
+            <td>1、單元格</td>
+            <td>2、單元格</td>
+            <td>3、單元格</td>
+            <td>4、單元格</td>
+        </tr>
+        <tr>
+            <td>1、單元格</td>
+            <td>2、單元格</td>
+            <td>3、單元格</td>
+            <td>4、單元格</td>
+        </tr>
+        <tr>
+            <td>1、單元格</td>
+            <td>2、單元格</td>
+            <td>3、單元格</td>
+            <td>4、單元格</td>
+        </tr>
+        <tr>
+            <td>1、單元格</td>
+            <td>2、單元格</td>
+            <td>3、單元格</td>
+            <td>4、單元格</td>
+        </tr>
+    </table>
+</body>
+</html>
