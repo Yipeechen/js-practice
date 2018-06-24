@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oUser = document.getElementById('user');
+            var oPs = document.getElementById('password');
+            var oBt = document.getElementById('bt');
+
+            //帳號
+            oUser.onkeydown = function(ev){
+                //事件對象
+                ev = event || ev;
+                console.log(ev.keyCode);
+
+                //.keycode特性 輸入鍵enter = 13
+                if(ev.keyCode == 13){ 
+                    oPs.focus();
+                }
+
+            }
+            
+            //密碼
+            oPs.onkeydown = function(ev){
+                ev = event || ev;
+                //輸入鍵
+                if (ev.keyCode == 13){
+                    login();
+                }
+            }
+
+            //登入
+            function login(){
+                alert('正在登入...');
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" placeholder="帳號" id="user">
+    <input type="text" placeholder="密碼" id="password">
+    <input type="button" value="登入" id="bt">
+</body>
+</html>
