@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #menu {
+            width: 50px;
+            height: 80px;
+            border: 1px solid blue;
+            position: absolute;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oMenu = document.getElementById('menu');
+
+            //鼠標右鍵方法 .oncontextmenu
+            document.oncontextmenu = function(ev){
+                // alert(1);
+
+                //獲取事件源
+                ev = event || ev;
+
+                //鼠標位置
+                oMenu.style.display = 'block';
+                oMenu.style.left = ev.clientX + 'px';
+                oMenu.style.top = ev.clientY + 'px';
+
+                //阻止右鍵默認行為方法一、 (IE: returnValue / 非IE: preventDefault())
+                ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
+
+                //阻止右鍵默認行為方法二、
+                return false;
+            }
+
+            document.onclick = function(){
+                oMenu.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="menu">
+
+    </div>
+</body>
+</html>
