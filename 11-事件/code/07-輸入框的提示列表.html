@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS practice</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #search {
+            width: 150px;
+            margin: 30px auto;
+        }
+        input{
+            width: 150px;
+            border: 1px solid blue;
+            height: 20px;
+        }
+        ul {
+            width: 150px;
+            list-style: none;
+            border: 1px solid gray;
+            display: none;
+        }
+        li {
+            width: 140px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 10px;
+        }
+        .active {
+            background: gray;
+            color: white;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oInput = document.getElementById('text');
+            var oUl = document.getElementsByTagName('ul')[0];
+            var aLi = document.getElementsByTagName('li');
+            
+            
+            oInput.onfocus = function(){
+                oUl.style.display = 'block';
+            }
+            oInput.onblur = function(){
+                //問題一、失去焦點即消失，故點擊選項無法獲取內容
+                // oUl.style.display = 'none';
+
+                //問題一、解決方法：延遲消失
+                setTimeout(function(){
+                    oUl.style.display = 'none';
+                }, 200);
+            }
+
+            //方法一、常規: 添加選項點擊事件
+            // for(var i=0; i<aLi.length; i++){
+            //     aLi[i].onclick = function(){
+            //         oInput.value = this.innerHTML;
+            //     }
+            // }
+
+            //方法二、事件冒泡
+            //每個點擊li，事件冒泡 >> 傳遞給ul
+            oUl.onclick = function(ev){
+                //通過事件源：得知哪一個li點擊
+                ev = window.event || ev;   //事件對象
+                var self = ev.target || ev.srcElement;  //事件源
+                oInput.value = self.innerHTML;
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="search">
+        <input type="text" id="text" placeholder="請輸入搜尋內容">
+        <ul>
+            <li>HTML學習</li>
+            <li>HTML5</li>
+            <li>HTML5+</li>
+            <li>HTML MUI</li>
+            <li>HTML app開發</li>
+            <li>HTML教學視頻</li>
+            <li>HTML教程</li>
+        </ul>
+    </div>
+</body>
+</html>
