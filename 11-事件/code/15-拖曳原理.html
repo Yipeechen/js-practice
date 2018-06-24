@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            
+            var oBox = document.getElementById('box');
+
+            oBox.onmousedown = function(ev){
+                
+                //保存鼠標相對元素的位置
+                ev = event || ev;
+                var dowX = ev.offsetX;
+                var dowY = ev.offsetY;
+
+                //鼠標移動範圍是整個document
+                document.onmousemove = function(ev){
+                    ev = event || ev;
+                    
+
+                    //求元素距離瀏覽器左邊的位置 = ev.clientX(鼠標距離瀏覽器左邊的位置) - dowX(鼠標相對於元素的位置)
+                    oBox.style.left = ev.clientX - dowX + 'px';
+                    oBox.style.top = ev.clientY - dowY + 'px';
+                }
+
+                //鼠標鬆開時
+                document.onmouseup = function(){
+                    document.onmouseup = document.onmousemove = null;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+</html>
