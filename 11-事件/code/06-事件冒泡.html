@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #view1 {
+            width: 300px;
+            height: 300px;
+            background: red;
+        }
+        #view2 {
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+        #view3 {
+            width: 100px;
+            height: 100px;
+            background: purple;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oView1 = document.getElementById('view1');
+            var oView2 = document.getElementById('view2');
+            var oView3 = document.getElementById('view3');
+
+            //點擊view3時，觸發view2、view1、document
+            //點擊出現怪異現象，考慮是否因為事件冒泡因素
+            oView3.onclick = function(ev){
+
+                //阻止事件冒泡：兼容性問題(IE: cancelBubble / 非IE: .stopPropagation())
+                ev.stopPropagation ? ev.stopPropagation() : ev.cancelBubble = true;
+
+                alert('view3');
+            }
+            oView2.onclick = function(){
+                alert('view2');
+            }
+            oView1.onclick = function(){
+                alert('view1');
+            }
+            document.onclick = function(){
+                alert('document');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="view1">
+        <div id="view2">
+            <div id="view3">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
