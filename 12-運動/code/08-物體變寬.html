@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 100px;
+            height: 50px;
+            background-color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+            
+            //鼠標移入：變寬
+            oBox.onmouseover = function(){
+                startMove(this,300);
+            }
+
+            //鼠標移出:恢復成原樣
+            oBox.onmouseout = function(){
+                startMove(this,100);
+            }
+
+            //＊緩衝運動:現在改變的值是寬度 .offsetWidth
+            var timer = null;
+            //操作(要移動的)對象：obj: oBox1 / oBox2
+            //目標位置：target
+            function startMove(obj,target){
+                clearInterval(timer);
+
+                timer = setInterval(function(){
+                    var speed = (target - obj.offsetWidth) / 7;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    
+                    if(obj.offsetWidth == target){  //停止
+                        clearInterval(timer);
+                    } else {    //運動
+                        obj.style.width = obj.offsetWidth + speed + 'px';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
