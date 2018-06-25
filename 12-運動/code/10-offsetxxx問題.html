@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 200px;
+            height: 80px;
+            background-color: red;
+            border: 1px solid gray; /* 問題點：加了邊框後鼠標移入後是呈現變大，應該呈現變小 */
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+
+            var timer = null;
+
+            //鼠標移入時物件會變小
+            oBox.onmouseover = function(){
+                /* 問題點：.offsetWidth
+                * 初始狀態：width = 200px + 2px(border) = 202px
+                * 鼠標移入：
+                (1)width = 202(.offsetWidth回傳元素的寬，包含邊框) - 1 = 201px 
+                >> 但有border：1px >> 變成 『203px』 >> 比原本的 『202px』 還要更大
+                (2)width = 203(.offsetWidth回傳元素的寬，包含邊框) - 1 = 202px 
+                >> 但有border：1px >> 變成 『204px』 >> 比原本的 『203px』 還要更大
+                */
+                timer = setInterval(function(){
+                    // oBox.style.width = oBox.offsetWidth - 1 + 'px';
+                    
+                    oBox.style.width = getStyle(oBox, 'width') - 1 + 'px';
+
+                },100);
+            }
+
+            //鼠標移出時物件恢復原樣
+            oBox.onmouseout = function(){
+                clearInterval(timer);
+            }
+
+            //＊解決方法 getStyle(obj,arr)：需要獲取物件的width屬性，而不能是.offsetWidth
+            function getStyle(obj,att){
+                //先檢查getComputedStyle存不存在，如果存在(非IE)獲取這個物件裡面的屬性，如果不存在(IE)
+                return parseInt(window.getComputedStyle ? getComputedStyle(obj)[att]: obj.currentStyle[att]);
+                //因為width是帶有像素的，故需要取整就好
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+</html>
