@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            position: absolute;
+            left: 600px;
+            top: 180px;
+        }
+        #line {
+            width: 1px;
+            height: 300px;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 300px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox1 = document.getElementById('box1');
+            var oBox2 = document.getElementById('box2');
+
+            oBox1.onclick = function(){
+                startMove(this,300); //位置超越過線(由左至右)
+            }
+
+            oBox2.onclick = function(){
+                startMove(this,200); //位置剛好到線(由右至左)
+            }
+            
+            var timer = null;
+            //操作(要移動的)對象：obj: oBox1 / oBox2
+            //目標位置：target
+            function startMove(obj,target){
+                clearInterval(timer);
+
+                timer = setInterval(function(){
+                    console.log(obj.offsetLeft);
+                    // ＊問題所在：沒有到target目標點，導致一直不能停止
+                    // 294 + 7 = 301
+                    // 301 - 7 = 294
+                    // ＊解決方式：勻速運動 -> 距離足夠近的時候進行處理
+                    // target - obj.offsetLeft < speed
+                    // 300 - 294 < 7 成立，說明接近目標 
+                    // 300 - 280 < 7 不成立 ==> 280 + 7 = 287
+
+
+                    //  緩衝運動原本條件：target = obj.offsetLeft + speed
+                    // ＊現在條件： target < obj.offsetLeft + speed
+                    // ＊等於： target - obj.offsetLeft < speed
+
+                    // ＊勻速運動：速度固定值
+                    var speed = 7;
+                    
+                    //方向判斷處理
+                    speed = obj.offsetLeft < target ? speed : -speed;
+                    
+                    // ＊對條件式進行處理：取絕對值 Math.abs()
+                    if(Math.abs(target - obj.offsetLeft) < Math.abs(speed)){  //停止
+                        // ＊將物件拉到目標位置
+                        obj.style.left = target + 'px';
+                        clearInterval(timer);
+                    } else {    //運動
+                        obj.style.left = obj.offsetLeft + speed + 'px';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="line"></div>
+    <div id="box2"></div>
+</body>
+</html>
