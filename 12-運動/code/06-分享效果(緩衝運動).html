@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 2000px;
+        }
+        #content {
+            width: 80px;
+            height: 120px;
+            background: #f2f2f2;
+            position: absolute;
+            left: 0;
+            top: 200px;
+            text-align: center;
+            /* 初始設置為隱藏 */
+            left: -80px;
+        }
+        #content a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            line-height: 30px;
+        }
+        #title {
+            width: 30px;
+            height: 50px;
+            background: darkgray;
+            color: white;
+            position: absolute;
+            left: 80px;
+            top: 25px;
+            text-align: center;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+           var oContent = document.getElementById('content'); 
+           var oTitle = document.getElementById('title');
+           //新增計時器:避免時鐘有兩個以上，勿放入startMove()
+           var timer = null;
+
+            //  解決問題 #title 移入 #content 區塊
+            oContent.onmouseover = function(){
+                // this.style.left = '0';
+                //left: -80 >> 0
+                startMove(0);
+            }
+
+            oContent.onmouseout = function(){
+                // this.style.left = '-80px';
+                //left: 0 >> -80
+                startMove(-80);
+            }
+            
+            // target目標位置
+            function startMove(target){
+                // 放置在這裡會有問題：每次都定義新的timer，之前的timer沒有停止
+                // var timer = null; 
+                clearInterval(timer);
+
+                //速度
+                var speed = 10;
+                //控制方向：speed(+):從左到右/speed(-):從右到左
+                // speed(+):從左到右 => oContent.offsetLeft:-80 >> target:0 
+                // => oContent.offsetLeft < target
+                speed = oContent.offsetLeft < target ? speed : -speed;
+
+                timer = setInterval(function(){
+                    if(oContent.offsetLeft == target){ //停止：到達目標點
+                        clearInterval(timer);
+                    } else {  //運動
+                        oContent.style.left = oContent.offsetLeft + speed + 'px';
+                    }
+                },100);
+            }
+
+            //滾動事件
+            window.onscroll = function(){
+                var oContent = document.getElementById('content');
+
+                //兼容性寫法：可視化介面窗口大小
+                var screenH = document.documentElement.clientHeight || document.body.clientHeight;
+                var top = (screenH - oContent.offsetHeight) / 2;
+
+                //兼容性寫法：獲取滾動條位置(指的是滾動條上面滑過的部分那一截)
+                var offsetTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+                //* 刪去 oContent.style.top = top + offsetTop + 'px';
+                //* 緩衝運動改寫
+                var target = top + offsetTop;
+                //* startMove2(oContent,target);  //會出現小數問題，因為top的值/2
+                //* 處理小數問題
+                startMove2(oContent, parseInt(target));
+            }
+            
+
+            //* 緩衝運動加入
+            var timer = null;
+            function startMove2(obj,target){
+                //先停止時鐘
+                clearInterval(timer);
+
+                timer = setInterval(function(){
+                    //速度 = (目標點 - 當前值)/縮放係數
+                    var speed = (target - obj.offsetTop) / 7;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    console.log(speed);
+
+                    if(obj.offsetTop == target){ //停止
+                        clearInterval(timer);
+                    } else {  // 運動
+                        obj.style.top = obj.offsetTop + speed + 'px';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="content">
+        <a href="#">Line</a>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+        <a href="#">微博</a>
+        <div id="title">
+            分享
+        </div>
+    </div>
+    
+</body>
+</html>
