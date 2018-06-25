@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+        #line {
+            width: 1px;
+            height: 300px;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 300px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+            var oBt = document.getElementById('bt');
+            var timer = null;
+            var speed = 10;
+
+            oBt.onclick = function(){
+                //先停止時鐘：避免在移動的過程中『繼續點擊』移動按鈕
+                clearInterval(timer);
+
+
+                timer = setInterval(function(){
+                    if(oBox.offsetLeft == 300){ //oBox停止
+                        clearInterval(timer);
+                    } else {                    //oBox運動
+                        oBox.style.left = oBox.offsetLeft + speed + 'px';
+                    }
+                },100)
+
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="移動" id="bt">
+    <div id="box"></div>
+    <div id="line"></div>
+</body>
+</html>
