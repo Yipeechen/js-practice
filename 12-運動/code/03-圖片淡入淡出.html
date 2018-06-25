@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        img{
+            width: 700px;
+            opacity: 0.3;
+            filter: alpha(opacity = 30);  /* IE兼容性寫法 */
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oImg = document.getElementsByTagName('img')[0];
+
+            //鼠標移入：圖片淡入
+            oImg.onmousemove = function(){
+                startMove(100);
+            }
+
+            //鼠標移出：圖片淡出
+            oImg.onmouseout = function(){
+                startMove(30);
+            }
+
+            var timer = null; //時鐘
+            var alpha = 30;  //默認透明度:30 此處指定欲運動屬性:opacity
+            //target目標位置
+            function startMove(target){
+                //timer放置此處會有問題，每次都定義新的timer，之前的timer沒有停止
+                //var timer = null;
+                clearInterval(timer);
+
+                //speed(+)：從小到大 speed(-)：從大到小
+                var speed = 10; //每個間隔增加10 opacity
+                speed = alpha < target? speed : -speed;
+
+                timer = setInterval(function(){
+                    if(alpha == target){ //停止
+                        clearInterval(timer);
+                    } else {            //運動
+                        alpha += speed;
+                        //兼容性寫法(非IE: oImg.style.opacity / IE:oImg.style.filiter)
+                        oImg.style.opacity = alpha /100;
+                        oImg.style.filiter = 'alpha(opacity=' +alpha + ');';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="img/Akali_Splash_0.jpg">
+</body>
+</html>
