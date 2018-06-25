@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            position: absolute;
+            left: 600px;
+            top: 180px;
+        }
+        #line {
+            width: 1px;
+            height: 300px;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 300px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox1 = document.getElementById('box1');
+            var oBox2 = document.getElementById('box2');
+
+            oBox1.onclick = function(){
+                startMove(this,300); //位置超越過線(由左至右)
+            }
+
+            oBox2.onclick = function(){
+                startMove(this,200); //位置剛好到線(由右至左)
+            }
+            
+            var timer = null;
+            //操作(要移動的)對象：obj: oBox1 / oBox2
+            //目標位置：target
+            function startMove(obj,target){
+                clearInterval(timer);
+
+                timer = setInterval(function(){
+
+                    //速度 ＝ (目標點 - 當前值) / 縮放係數（縮放係數為7較適合）
+                    //距離越大，速度越快
+                    var speed = (target - obj.offsetLeft) / 7;
+                    //＊問題：值是小數
+                    console.log(speed);
+
+                    //＊解決方法：數值取整方法、
+                    // 向上(大)取整 Math.ceil() [用在由小至大/由左至右] 
+                    // 向下(小)取整 Math.floor()[用在由大至小/由右至左]
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    
+                    if(obj.offsetLeft == target){  //停止
+                        clearInterval(timer);
+                    } else {    //運動
+                        obj.style.left = obj.offsetLeft + speed + 'px';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="line"></div>
+    <div id="box2"></div>
+</body>
+</html>
