@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        #box1, #box2, #box3, #box4 {
+            width: 100px;
+            height: 50px;
+            background-color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var aBox = document.getElementsByTagName('div');
+
+            //單個物體：100 >> 300 [時鐘]
+
+            //＊多個物體(問題)： 時鐘只有一個
+            //box1: 100 >> 200 [時鐘] ==> 300
+            //鼠標移動到box2: 應該要 box1: 200 >>100，但是『鼠標移出』物體即會停止變形
+
+            //透過循環的方式都給它們添加鼠標移入出功能
+            for(var i = 0; i<aBox.length; i++){
+                //鼠標移入：變寬
+                aBox[i].onmouseover = function(){
+                    startMove(this,300);
+                }
+
+                //鼠標移出:恢復成原樣
+                aBox[i].onmouseout = function(){
+                    startMove(this,100);
+                }
+
+                //＊解決方法：給每個物體添加時鐘（自帶時鐘），即不需要每次都在外面定義
+                aBox[i].timer = null;
+            }
+            
+            
+
+            //緩衝運動:現在改變的值是寬度 .offsetWidth
+            // var timer = null; //＊不需要每次都在外面定義
+            //操作(要移動的)對象：obj: oBox1 / oBox2
+            //目標位置：target
+            function startMove(obj,target){
+                clearInterval(obj.timer); //＊控制自身的時鐘停止
+
+                obj.timer = setInterval(function(){ //＊也會控制自身的時鐘開啟
+                    var speed = (target - obj.offsetWidth) / 7;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    
+                    if(obj.offsetWidth == target){  //停止
+                        clearInterval(obj.timer); //＊控制自身的時鐘停止
+                    } else {    //運動
+                        obj.style.width = obj.offsetWidth + speed + 'px';
+                    }
+                },100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1"></div> <br/>
+    <div id="box2"></div> <br/>
+    <div id="box3"></div> <br/>
+    <div id="box4"></div> <br/>
+</body>
+</html>
