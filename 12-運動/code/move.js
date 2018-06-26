@@ -18,7 +18,7 @@ function startMove(obj, att, target){
         if(att == 'opacity'){   //特定設定透明度部分
             currentValue = parseInt(getStyle(obj,att)*100); //讓數值在0-100 ，取出來的值在0-1
         } else {
-            currentValue = getStyle(obj,att);
+            currentValue = parseInt(getStyle(obj,att));
         }
         // 2. 設置速度
         speed = (target - currentValue) / 7;
@@ -41,5 +41,5 @@ function startMove(obj, att, target){
 
 //＊獲取物件屬性函數
 function getStyle(obj,att){
-    return parseInt(window.getComputedStyle ? getComputedStyle(obj)[att] : obj.currentStyle[att]);
+    return window.getComputedStyle ? getComputedStyle(obj)[att] : obj.currentStyle[att];
 }
