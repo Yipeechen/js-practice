@@ -15,7 +15,11 @@ function startMove(obj, att, target){
 
     obj.timer = setInterval(function(){
         // 1. 獲取當前值
-        currentValue = getStyle(obj,att);
+        if(att == 'opacity'){   //特定設定透明度部分
+            currentValue = parseInt(getStyle(obj,att)*100); //讓數值在0-100 ，取出來的值在0-1
+        } else {
+            currentValue = getStyle(obj,att);
+        }
         // 2. 設置速度
         speed = (target - currentValue) / 7;
         speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
@@ -24,7 +28,13 @@ function startMove(obj, att, target){
         if(currentValue == target){  //停止
             clearInterval(obj.timer);
         } else {   //運動
+
+            if(att == 'opacity'){
+                obj.style.opacity = currentValue /100; // 非IE部分
+                obj.style.filter = 'alpha(opacity:' + currentValue + ')'; // IE部分
+            } else {
             obj.style[att] = currentValue + 'px';
+            }
         }
     },30);
 }

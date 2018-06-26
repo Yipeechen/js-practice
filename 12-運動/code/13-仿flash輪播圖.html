@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        #box {
+            width: 500px;
+            height: 400px;
+            border: 1px solid gray;
+            margin: 40px auto;
+        }
+        #box .bigView {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        #box .bigView ul {
+            list-style: none;
+            width: 2500px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #box .bigView ul li {
+            width: 500px;
+            height: 300px;
+            float: left;
+        }
+        #box .bigView img {
+            width: 500px;
+            height: 300px;
+        }
+        #box .back img,
+        #box .next img {
+            width: 50px;
+            height: 50px;
+        }
+        #box .back {
+            width: 250px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            opacity: 0;
+            filter: alpha(opacity = 0);  /*兼容性寫法：IE部分*/
+        }
+        #box .back:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);  /*兼容性寫法：IE部分*/
+        }
+        #box .back img {
+            position: absolute;
+            left: 0;
+            top: 125px;
+        }
+        #box .next {
+            width: 250px;
+            height: 300px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+            opacity: 0;
+            filter: alpha(opacity = 0);  /*兼容性寫法：IE部分*/
+        }
+        #box .next:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);  /*兼容性寫法：IE部分*/
+        }
+        #box .next img {
+            position: absolute;
+            right: 0;
+            top: 125px;
+        }
+        #box .smallView {
+            width: 500px;
+            height: 100px;
+            background-color: gray;
+            position: relative;
+            overflow: hidden;
+        }
+        #box .smallView ul {
+            width: 900px; /* 180 * 5 = 900 */
+            height: 100px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        #box .smallView li {
+            float: left;
+            opacity: 0.3;
+            filter: alpha(opacity=30);  /*兼容性寫法：IE部分*/
+        }
+        #box .smallView img {
+            width: 160px;
+            height: 80px;
+            margin: 10px;
+        }
+    </style>
+    <script src="move.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var oBox = document.getElementById('box');                      //最外層的div
+            var oBigView = oBox.getElementsByClassName('bigView')[0];       //上半部大圖
+
+            var oBack = oBigView.getElementsByClassName('back')[0];         //往左箭頭
+            var oNext = oBigView.getElementsByClassName('next')[0];         //往右箭頭
+
+            var oBigViewUl = oBigView.getElementsByTagName('ul')[0];        //上半部大圖的ul
+            var oBigViewLi = oBigView.getElementsByTagName('li');           //上半部大圖的li
+
+            var oSmallView = oBox.getElementsByClassName('smallView')[0];   //下半部小圖
+            var oSmallViewUl = oSmallView.getElementsByTagName('ul')[0];    //下半部小圖的ul
+            var aSmallLi = oSmallView.getElementsByTagName('li');           //下半部小圖的li
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <!-- 大圖 -->
+        <div class="bigView">
+            <div class="back">
+                <a href="#">
+                    <img src="img/left.png">
+                </a>
+            </div>
+            <div class="next">
+                <a href="#">
+                    <img src="img/right.png">
+                </a>
+            </div>
+            <ul>
+                <li><img src="img/Akali_Splash_0.jpg"></li>
+                <li><img src="img/Akali_Splash_1.jpg"></li>
+                <li><img src="img/Akali_Splash_2.jpg"></li>
+                <li><img src="img/Akali_Splash_3.jpg"></li>
+                <li><img src="img/Akali_Splash_4.jpg"></li>
+            </ul>
+        </div>
+
+        <!-- 小圖 -->
+        <div class="smallView">
+            <ul>
+                <li><img src="img/Akali_Splash_0.jpg"></li>
+                <li><img src="img/Akali_Splash_1.jpg"></li>
+                <li><img src="img/Akali_Splash_2.jpg"></li>
+                <li><img src="img/Akali_Splash_3.jpg"></li>
+                <li><img src="img/Akali_Splash_4.jpg"></li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
