@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Js practice</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 920px;
+            height: 170px;
+            margin: 30px auto;
+        }
+        li {
+            width: 300px;
+            height: 170px;
+            position: relative;
+            list-style: none;
+            float: left;
+        }
+        li p {
+            width: 290px;
+            position: absolute;
+            left: 5px;
+            background-color: darkgray;
+            color: white;
+            bottom: 5px;
+            font-size: 12px;
+            text-align: center;
+            height: 0; /* 預設情況下不顯示 */
+            overflow: hidden;
+        }
+    </style>
+    <script src="onload.js"></script>
+    <script src="move.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var aLi = document.getElementsByTagName('li');
+
+            for(var i = 0; i<aLi.length; i++){
+                //鼠標移入
+                aLi[i].onmouseover = function(){
+                    var temp = this.getElementsByTagName('p')[0];
+                    startMove(temp, 'height',50);
+                }
+                //鼠標移出
+                aLi[i].onmouseout = function(){
+                    var temp = this.getElementsByTagName('p')[0];
+                    startMove(temp,'height',0);
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li>
+            <a href="#">
+                <img src="img/b1.jpg" alt="html5">
+                <p>
+                    HTML5學習<br>
+                    本課程由淺入深，逐步推進，以實例為主線，詳細完整的介紹新功能以及特性
+                </p>
+            </a>
+        </li>
+        <li style="margin: 0 10px;">
+            <a href="#">
+                <img src="img/b2.jpg" alt="html5">
+                <p>
+                    HTML5學習<br>
+                    本課程由淺入深，逐步推進，以實例為主線，詳細完整的介紹新功能以及特性
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="img/b3.jpg" alt="html5">
+                <p>
+                    HTML5學習<br>
+                    本課程由淺入深，逐步推進，以實例為主線，詳細完整的介紹新功能以及特性
+                </p>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
