@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js practice</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #box {
+      width: 1000px;
+      height: 500px;
+      border: 1px solid gray;
+      margin: 30px auto;
+      overflow: hidden;
+      position: relative;
+    }
+    #box img{
+      width: 320px;
+      height: 480px;
+      margin: 10px;
+    }
+    #box ul {
+      width: 2040px; /* (320+20)*6*/
+      height: 480px;
+      
+      position: absolute;
+      /* left: -700px; 圖片往左移動要素 */
+    }
+    li {
+      list-style: none;
+      float: left;
+      display: block;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function(){
+      var oBox = document.getElementById('box');
+      var oUl = document.getElementsByTagName('ul')[0];
+      var timer = null;
+
+      oUl.innerHTML += oUl.innerHTML;
+      oUl.style.width = oUl.offsetWidth * 2 + 'px';
+
+      //一開始進來就開始計時
+      startTimer()
+
+      //當鼠標移入時，停止計時
+      oBox.onmousemove = function(){
+        stopTimer()
+      }
+
+      //當鼠標移出時，開始計時
+      oBox.onmouseout = function(){
+        startTimer()
+      }
+
+
+      function startTimer(){
+        if(timer == null){
+          timer = setInterval(scroll, 20);
+        }
+      }
+
+      function stopTimer(){
+        clearInterval(timer)
+        timer = null;
+      }
+
+      //滾動函數
+      function scroll(){
+        oUl.style.left = oUl.offsetLeft - 3 + 'px';
+        
+        //一組:2040px
+        //兩組:4080px 
+
+        // -2040 臨界值
+        // -4080 (第二組相片)
+        // 如果 -2040px(-oUl.offsetWidth/2)以上(-2050px)表示已經進行到第二組
+        if(oUl.offsetLeft <= - oUl.offsetWidth/2){
+          //拉回到原點
+          oUl.style.left = 0;
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="box">
+    <ul>
+      <li><img src="https://picsum.photos/320/480" alt=""></li>
+      <li><img src="https://picsum.photos/320/481" alt=""></li>
+      <li><img src="https://picsum.photos/320/482" alt=""></li>
+      <li><img src="https://picsum.photos/320/483" alt=""></li>
+      <li><img src="https://picsum.photos/320/484" alt=""></li>
+      <li><img src="https://picsum.photos/320/485" alt=""></li>
+    </ul>
+  </div>
+</body>
+</html>
