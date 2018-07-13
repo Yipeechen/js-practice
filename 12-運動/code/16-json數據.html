@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js practice</title>
+  <style type="text/javascript"></style>
+  <script type="text/javascript">
+    //array對象
+    //json 對象 => key-value 鍵值對
+
+    var json = {
+      name: 'John',
+      sex: '男',
+      age: 18
+    }
+
+    //獲取值方式一
+    alert(json.name)
+    //獲取值方式二
+    alert(json['name'])
+
+    //遍歷json
+    for(key in json){
+      //1. 取鍵
+      document.write(key + '</br>')
+      //2. 取值
+      document.write(json[key] + '</br>')
+    }
+
+    //對比arr：為索引值數字難以直覺內容形式
+    // var arr = ['Jhon', 18, '男']
+    // arr[0]
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
