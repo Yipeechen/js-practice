@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js practice</title>
+  <style type="text/css">
+    #box{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      opacity: 0.3;
+    }
+  </style>
+  <script src="move2.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.onload = function(){
+      var oBox = document.getElementById('box');
+
+      oBox.onclick = function(){
+        //1.寬度變為300
+        startMove(oBox,'width',300, function(){
+          //2.高度變為300
+          startMove(oBox,'height',300, function(){
+            //3.透明度變為1
+            startMove(oBox,'opacity',100); //結束操作不用在加入回調函數
+          });
+        });
+      }
+    }
+  </script>
+</head>
+<body>
+    <!-- 
+      寬度變為300
+      高度變為300
+      透明度變為 1
+     -->
+    <div id="box"></div>
+</body>
+</html>
