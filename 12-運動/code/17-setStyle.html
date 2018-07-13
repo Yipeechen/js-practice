@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js practice</title>
+  <style type="text/css">
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function(){
+      var oBox = document.getElementById('box');
+      oBox.onclick = function(){
+
+        //使用setStyle()
+        setStyle(this, {
+          width: '200px',
+          height: '200px',
+          backgroundColor: 'purple'
+        })
+      }
+
+    }
+    
+    //未使用JSON只能傳遞一個att，使用JSON可以一次寫入多樣式改變變化
+    function setStyle(obj, attJSON){
+      for(key in attJSON){
+        obj.style[key] = attJSON[key];
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="box"></div>
+</body>
+</html>
